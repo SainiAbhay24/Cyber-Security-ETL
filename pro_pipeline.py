@@ -12,7 +12,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logging.info("🚀 Starting Advanced Cyber ETL Pipeline...")
-print("⏳ Pipeline chal rahi hai... Kripya wait karo...")
+print("⏳ Pipeline are ready...")
 
 # 2. LOAD VAULT (.env file)
 load_dotenv()
@@ -35,10 +35,10 @@ try:
     
     if not records:
         logging.info("👍 No new IPs to process. Everything is up to date!")
-        print("✅ Saare IPs da data pehlan hi update ho chuka hai! Koi nava IP nahi hai.")
+        print("✅ IP are already updated.")
     else:
         logging.info(f"🔍 Found {len(records)} new IPs to process.")
-        print(f"🔍 {len(records)} nave IPs labhe ne. Data kadd reha haan...")
+        print(f"🔍 {len(records)} Find new IP")
         
         # 5. TRANSFORM & LOAD 
         for row in records:
@@ -78,8 +78,8 @@ try:
     cursor.close()
     conn.close()
     logging.info("🔌 Pipeline closed cleanly.")
-    print("🏁 Pipeline Execution Complete! 'pipeline_run.log' file check karo.")
+    print("🏁 Pipeline Execution Complete! 'pipeline_run.log' file check.")
 
 except Exception as db_err:
     logging.error(f"❌ Database connection failed: {db_err}")
-    print("⚠️ Error aagya! Log file check karo.")
+    print("⚠️ Error! Log file check.")
