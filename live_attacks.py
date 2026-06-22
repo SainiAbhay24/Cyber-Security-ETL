@@ -4,9 +4,6 @@ import time
 from dotenv import load_dotenv
 import os
 
-# Fake data list to simulate live hackers
-# Fake data list to simulate live hackers (UPDATED GLOBAL LIST)
-
 load_dotenv()
 
 
@@ -34,7 +31,7 @@ statuses = ['Blocked', 'Failed Login', 'Malware Detected']
 usernames = ['admin', 'root', 'administrator', 'system']
 
 try:
-    # Database naal connection (Tuhada password aur DB name)
+    
     conn = psycopg2.connect(
         dbname=os.getenv("DB_NAME"), 
         user=os.getenv("DB_USER"),
@@ -45,7 +42,7 @@ try:
     cursor = conn.cursor()
     print("✅ Database Connected! Live Hacker Bot Started...\n")
 
-    # Infinite loop - Eh script kade nahi rukegi (jad tak tusi band nahi karde)
+    
     while True:
         # Generate random attack data
         ip = f"{random.randint(11, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}"
@@ -55,17 +52,17 @@ try:
         status = random.choice(statuses)
         user = random.choice(usernames)
 
-        # SQL Query data insert karan layi
+        
         insert_query = """
             INSERT INTO daily_security_logs (ip_address, country, city, isp, status, username)
             VALUES (%s, %s, %s, %s, %s, %s)
         """
         cursor.execute(insert_query, (ip, country, city, isp, status, user))
-        conn.commit() # Save data to database
+        conn.commit()
 
         print(f"🔥 NEW THREAT LOGGED: IP {ip} from {city}, {country}")
         
-        # 3 seconds da wait, fir nava attack
+        
         time.sleep(3)
 
 except Exception as e:
