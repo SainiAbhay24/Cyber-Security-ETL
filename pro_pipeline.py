@@ -29,7 +29,7 @@ try:
     cursor = conn.cursor()
     logging.info("✅ Securely Connected to PostgreSQL Database!")
 
-    # 4. EXTRACT: Sirf oh IPs labho jinha da ISP haje update nahi hoya
+    # 4. EXTRACT
     cursor.execute("SELECT ip_address FROM daily_security_logs WHERE isp IS NULL;")
     records = cursor.fetchall()
     
@@ -40,7 +40,7 @@ try:
         logging.info(f"🔍 Found {len(records)} new IPs to process.")
         print(f"🔍 {len(records)} nave IPs labhe ne. Data kadd reha haan...")
         
-        # 5. TRANSFORM & LOAD (With Pro Upgrades: Timeout & Batch Commit)
+        # 5. TRANSFORM & LOAD 
         for row in records:
             ip = row[0]
             try:
@@ -70,7 +70,7 @@ try:
             except Exception as api_err:
                 logging.error(f"❌ API call crashed for IP {ip}: {api_err}")
 
-        # Batch Commit (Save all at once for speed)
+        # Batch Commit 
         conn.commit()
         logging.info("💾 All records successfully committed to the database in one batch!")
 
